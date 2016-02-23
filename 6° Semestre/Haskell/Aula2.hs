@@ -61,4 +61,32 @@ traduzirIP Thursday = Quinta
 traduzirIP Friday = Sexta
 traduzirIP Saturday = Sabado
 
+
 -- Uma das formas de utilizar reverse: reverse . show . traduzirIP $ Sunday
+
+-- Tuplas
+mult :: (Int, Int) -> Int 
+mult x  = fst x * snd x
+
+mult' :: (Int, Int) -> Int
+mult' (x,y) = x*y
+
+{-
+    1) Faca uma funcao que recebe um inteiro e é retornado o dobro deste inteiro na primeira 
+    coordenada de uma tupla e o triplo na segunda e o quadruplo na terceira.
+    2) Faca o tipo pessoa pode ser fisico ou juridico e tipo imposto que pode ser ISS, IRPF ou ICMS. Faca a funcao devePagar
+    Que recebe uma tupla de pessoa e imposto e informa se esta pessoa deve pagar ou nao este imposto.
+-}
+
+ex1 :: Int -> (Int, Int, Int)
+ex1 x = (2*x, 3*x, 4*x)
+
+
+data Pessoa = Fisica | Juridica deriving Show
+data Imposto  = Iss | Irpf | Icms deriving Show
+
+devePagar :: (Pessoa, Imposto) -> Bool
+devePagar (Fisica, Irpf) = True
+devePagar (Juridica, Irpf) = False
+devePagar (Juridica, _) = True
+devePagar (Fisica, _) = False

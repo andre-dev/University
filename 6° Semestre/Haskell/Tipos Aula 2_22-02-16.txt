@@ -1,1 +1,1 @@
-:! Clear -- Limpar a tela.
+:! clear -- Limpar a tela.
