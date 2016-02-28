@@ -93,3 +93,5 @@ todosPares n = [x | x <- [0 .. n], mod x 2 == 0]
 -- O dobro de todos os numeros de 0 a n maiores que 12 e menores que 142
 
 todos n = [ x*2 | x <- [0 .. n], x > 12, x < 142 ]
+
+todosMaisUm n =[(-1)*x | x <- [0 .. n]]
