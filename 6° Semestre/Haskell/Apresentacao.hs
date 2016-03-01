@@ -27,7 +27,8 @@ jogar (Tesoura, Pedra) = (Vitoria, Pedra)
     Exercício 1.5 Faça uma função que retorne uma string com todas as vogais
     maiúsculas e minúsculas eliminadas de uma string passada por parâmetro usando
     list compreenshion.
-    Dica: procure informações sobre a função elem.
+    Dica: procure informações sobre a função elem;
+    elem. Ela pega um elemento e uma lista e vê se aquele elemento está na lista.
 -}
 
 todasVogais :: [Char] -> [Char]
