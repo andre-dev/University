@@ -1,0 +1,12 @@
+Classes abstratas:
+
+Representa uma generalização de um conceito.
+
+~> Não pode ser instanciada.
+~> Pode possuir métodos abstratos(Conceitos também).
+~> Pode possuir atributos.
+
+Metodo abstrato:
+
+~> Metodo sem corpo de código. Seu intuito é representar uma ação que tem dependência de suas subclasses. Todo método abstrato deve ser sobrescrito.
+~> Devendo ser sobrescrito em uma classe concreta. Uma classe concreta é aquela que não é abstrata.
