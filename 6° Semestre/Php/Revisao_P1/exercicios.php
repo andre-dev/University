@@ -45,5 +45,18 @@ PARA PROVA:
 6) Abstração (Classes abstratas e interfaces).
 7) Conexão com o banco de dados, request (GET e POST) e response.
 
+
+
+O encapsulamento é o ato de você provê uma proteção de acesso aos membros internos de um objeto.
+
+Dizemos que esta classe não está coesa, ou seja, ela tem responsabilidades demais, e o que é pior, 
+responsabilidades que não são suas.
+
+
+Acoplamento significa o quanto uma classe depende da outra para funcionar. 
+E quanto maior for esta dependência entre ambas, dizemos que estas classes elas estão fortemente acopladas. 
+O forte acoplamento também nos traz muitos problemas
+
 */
+
 
