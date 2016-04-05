@@ -33,5 +33,34 @@ expr' = do
       return (x+y+z)
       
 -- data () = ()      
+mainw :: IO ()
+mainw = putStrLn "Ola mundo"
+
+--Segunda parte da aula---------------------------------------------------------
+
+data Tipo = A | B deriving (Show, Read)  
+-- As >> sempre vem depois de algo IO ()
 main :: IO ()
-main = putStrLn "Ola mundo"      
+main = putStrLn "Digite um nome: " >>
+       getLine >>= \x -> putStrLn ("Ola " ++ x)
+
+-- Na notacao do nao ha uso de operadores monadicos
+-- >>, >>=, =<<, ...
+main' :: IO ()
+main' = do
+      putStrLn "Digite um nome: "
+      x <- getLine
+      putStrLn ("Ola " ++ x)
+      
+main2 :: IO ()
+main2 = do
+      putStrLn "Digite um numero: "
+      x <- readLn
+      putStrLn ("O numero eh: " ++ show(x+1))
+      
+--main2'  = putStrLn "Digite um numero: " >> readLn >>= \x -> putStrLn("O numero eh " ++ x+1)
+ex1 = do
+       putStrLn "Digite um nome"
+       x <- getLine
+       putStrLn (reverse x)
+ex2 
