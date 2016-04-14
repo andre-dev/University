@@ -1,0 +1,5 @@
+Para abrir o .htaccess digitar na bash: c9 open .htaccess
+
+wget: Serve para pegar coisas para web.
+
+Link para importar o jquery: wget "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"
