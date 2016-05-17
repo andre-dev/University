@@ -1,0 +1,23 @@
+Host
+ec2-23-21-167-174.compute-1.amazonaws.com
+
+Database
+d91046tn78028p
+
+User
+vtcxrynhkahutd
+
+Port
+5432
+
+Password
+Hide y5PbW5KAo3ZOHAt9bkkbYGvjeZ
+
+Psql
+heroku pg:psql --app heroku-postgres-7f341c10 HEROKU_POSTGRESQL_ONYX
+
+URL
+Hide postgres://vtcxrynhkahutd:y5PbW5KAo3ZOHAt9bkkbYGvjeZ@ec2-23-21-167-174.compute-1.amazonaws.com:5432/d91046tn78028p
+
+
+connStr = "dbname=d91046tn78028p host=ec2-23-21-167-174.compute-1.amazonaws.com user=vtcxrynhkahutd password=y5PbW5KAo3ZOHAt9bkkbYGvjeZ port=5432"

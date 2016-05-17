@@ -1,0 +1,53 @@
+INSTALL YESOD:
+
+0) sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 575159689BEFB442
+
+1) echo 'deb http://download.fpcomplete.com/ubuntu trusty main'|sudo tee /etc/apt/sources.list.d/fpco.list
+
+2) sudo apt-get update && sudo apt-get install stack -y
+
+3) stack new web yesod-hello-world
+
+4) espere completar os 103 passos...
+
+cd web/
+stack setup
+stack build 
+
+Eecutando uma aplicação: stack exec -- web
+
+Para parar a aplicação ctrl+c
+
+curl -v -X POST https://hask2-romefaller.c9users.io
+
+
+--------------------------------------------------------Aula 2
+
+Control.Monad.Logger (runStdoutLoggingT): O que está entre os parentrese serve para apontar o que eu quero daquele import.
+data Pagina = Pagina{connPool :: ConnectionPool}: Aqui criamos uma conexão com o banco de dados.
+instance Yesod Pagina: Cria uma intancia de Pagina do tipo Yesod
+
+função "share" é um template;
+
+1) Cria a tabela Clientes com os campos id e nome;
+2) Cria o tipo no haskell dara Clientes {nomeClientes :: Text}
+    deriving Show
+3) A palavra json faz com que ele leia jsons da forma {nome:"Alguem"}
+
+ex: Tabela Venda, Campo preco
+    precoVenda -> Haskell
+    preco -> json
+    
+A instance de YesodPersist é control c + control v
+
+defaultLayout pega uma porrada de widgets e transforma em uma coisa só.
+
+função pack tranaforma string para text.
+
+O object pega o array e transforma para json.
+
+Database: d91046tn78028p
+Host: ec2-23-21-167-174.compute-1.amazonaws.com
+user: vtcxrynhkahutd
+pass: y5PbW5KAo3ZOHAt9bkkbYGvjeZ
+port: 5432

@@ -1,0 +1,64 @@
+{-# LANGUAGE OverloadedStrings, TypeFamilies, QuasiQuotes,
+             TemplateHaskell, GADTs, FlexibleInstances,
+             MultiParamTypeClasses, DeriveDataTypeable,
+             GeneralizedNewtypeDeriving, ViewPatterns, EmptyDataDecls #-}
+import Yesod
+import Database.Persist.Postgresql
+import Data.Text
+import Control.Monad.Logger (runStdoutLoggingT)
+
+data Pagina = Pagina{connPool :: ConnectionPool}
+
+instance Yesod Pagina
+-- 15, 16, 17, 21 e 22
+share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persistLowerCase|
+Clientes json
+   nome Text
+   deriving Show
+|]
+
+mkYesod "Pagina" [parseRoutes|
+/cadastro UserR POST
+/cadastro/check/#ClientesId CheckR GET
+/cadastro/update/#ClientesId UpdateR PUT
+|]
+
+instance YesodPersist Pagina where
+   type YesodPersistBackend Pagina = SqlBackend
+   runDB f = do
+       master <- getYesod
+       let pool = connPool master
+       runSqlPool f pool
+------------------------------------------------------
+
+postUserR :: Handler ()
+postUserR = do
+    clientes <- requireJsonBody :: Handler Clientes
+    runDB $ insert clientes
+    sendResponse (object [pack "resp" .= pack "CREATED"])
+
+getCheckR :: ClientesId -> Handler ()
+getCheckR pid = do
+    cli <- runDB $ get404 pid
+    sendResponse $ toJSON cli
+
+putUpdateR :: ClientesId -> Handler ()
+putUpdateR pid = do
+    cli <- requireJsonBody :: Handler Clientes
+    runDB $ update pid [ClientesNome =. clientesNome cli]
+    sendResponse (object [pack "resp" .= pack "UPDATED"])
+
+connStr = "dbname=dd9en8l5q4hh2a host=ec2-107-21-219-201.compute-1.amazonaws.com user=kpuwtbqndoeyqb password=aCROh525uugAWF1l7kahlNN3E0 port=5432"
+
+main::IO()
+main = runStdoutLoggingT $ withPostgresqlPool connStr 10 $ \pool -> liftIO $ do 
+       runSqlPersistMPool (runMigration migrateAll) pool
+       warp 8080 (Pagina pool)
+
+
+--------------------------------
+curl https://webhaskell-andre-dev-1.c9users.io/prod \
+  -v \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{"nome":"EU"}'

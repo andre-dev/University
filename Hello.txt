@@ -1,0 +1,48 @@
+{-# LANGUAGE OverloadedStrings     #-}{- Pragmas ou diretivas para compilação -}
+{-# LANGUAGE QuasiQuotes           #-}
+{-# LANGUAGE TemplateHaskell       #-}
+{-# LANGUAGE TypeFamilies          #-}
+import           Yesod
+{- O import acima importa a biblioteca do framework Yesod -}
+data HelloWorld = HelloWorld
+
+mkYesod "HelloWorld" [parseRoutes|
+/ HomeR GET POST
+/link LinkR GET
+|]
+{- Acima o antigo htccess na versão haskell passando uma rota -}
+instance Yesod HelloWorld
+{- O tipo hello world que representa sua página pois é uma instância de Yesod -}
+
+--site começa aqui
+--Handler = mecanismo do site, algo que você deseja renderizar. Tudo que vai ser mostrado na página.
+--defaultLayout: mostra na tela o html/css/js
+--whamlet: html
+--cassius: css
+--JULIUS: JS
+getHomeR :: Handler Html
+getHomeR = defaultLayout [whamlet|
+    <h1> Hello World!
+    <button onclick="teste()"> OK
+|] >> toWidget[cassius|
+    h1
+        color:red;
+|] >> toWidgetHead[julius|
+    function teste(){
+        alert("Ola mundo");
+    }
+|]
+
+postHomeR :: Handler Html
+postHomeR = defaultLayout $ [whamlet|
+    <h2>Ola do metodo POST
+|]
+
+getLinkR :: Handler Html
+getLinkR = defaultLayout $ [whamlet|
+    <a href=@{HomeR}> Pagina Inicial
+|]
+
+-- O site termina aqui.
+main :: IO ()
+main = warp 8080 HelloWorld
